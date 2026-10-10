@@ -4,7 +4,7 @@
   "minSdkVersion": "1.4.0",
   "id": "beings.goals",
   "name": "目标",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "与 Being 一起制定目标、记录进展并持续调整下一步。支持对话创建和更新目标。",
   "author": "Beings",
   "entry": "index.html",
@@ -93,7 +93,11 @@
           ]
         }
       },
-      "required": ["title", "category", "status"]
+      "required": [
+        "title",
+        "category",
+        "status"
+      ]
     }
   }
 }
