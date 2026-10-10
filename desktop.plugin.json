@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "apiVersion": 1,
+  "minSdkVersion": "1.4.0",
+  "id": "beings.goals",
+  "name": "目标",
+  "version": "0.1.0",
+  "description": "与 Being 一起制定目标、记录进展并持续调整下一步。支持对话创建和更新目标。",
+  "author": "Beings",
+  "entry": "index.html",
+  "capabilities": [
+    "agent.read",
+    "agent.write",
+    "being.read",
+    "being.compose",
+    "ui"
+  ],
+  "contributes": {
+    "views": [
+      {
+        "id": "goals",
+        "title": "目标"
+      },
+      {
+        "id": "preferences",
+        "title": "目标协作偏好"
+      }
+    ],
+    "settingsView": "preferences",
+    "commands": [
+      {
+        "id": "new-goal",
+        "title": "制定新目标",
+        "view": "goals"
+      }
+    ],
+    "slots": [
+      {
+        "id": "goal-companion",
+        "title": "当前目标",
+        "view": "goals",
+        "location": "right-sidebar"
+      }
+    ],
+    "agent": {
+      "description": "目标协作：制定目标、明确验收标准、记录进展、调整下一步与关注重点。",
+      "instructions": "This is the Goals plugin behavior, applicable only when the user chooses goal collaboration. Clarify desired outcome, completion criteria, and next step. Create records to persist agreed goals. Follow the user’s latest intent; do not add unrelated objectives. Read current records before changes and include a reason or completion evidence in note. A finished execution task is not proof a goal is complete. Pause/complete/archive status means do not continue that goal. preferences.guidance applies only to this plugin task. preferences.focusId identifies the selected focus; only treat it as active when its status is active or waiting. Do not claim reminders or autonomous scheduling; the plugin stores state only. Tell the user if Portal or the desktop client is unavailable. Do not change preferences unless the user requests it.",
+      "fields": {
+        "title": {
+          "type": "string",
+          "title": "目标名称",
+          "maxLength": 160
+        },
+        "category": {
+          "type": "string",
+          "title": "类别",
+          "enum": [
+            "health",
+            "relationships",
+            "finance",
+            "career",
+            "interests",
+            "productivity",
+            "other"
+          ]
+        },
+        "outcome": {
+          "type": "string",
+          "title": "期望结果",
+          "maxLength": 3000
+        },
+        "criteria": {
+          "type": "strings",
+          "title": "验收标准",
+          "maxItems": 12,
+          "maxLength": 300
+        },
+        "nextAction": {
+          "type": "string",
+          "title": "下一步",
+          "maxLength": 1000
+        },
+        "status": {
+          "type": "string",
+          "title": "状态",
+          "enum": [
+            "draft",
+            "active",
+            "waiting",
+            "paused",
+            "completed",
+            "archived"
+          ]
+        }
+      },
+      "required": ["title", "category", "status"]
+    }
+  }
+}
